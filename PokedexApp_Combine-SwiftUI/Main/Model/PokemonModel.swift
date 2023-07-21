@@ -8,7 +8,11 @@
 import UIKit
 
 // MARK: - PokemonModel
-struct PokemonModel: Decodable {
+struct PokemonModel: Decodable, Hashable {
+    static func == (lhs: PokemonModel, rhs: PokemonModel) -> Bool {
+        lhs.id == rhs.id && lhs.name == rhs.name
+    }
+    
     let id: Int
     let name: String
     
@@ -24,7 +28,7 @@ struct PokemonModel: Decodable {
 }
 
 // MARK: Ability
-struct Ability: Decodable{
+struct Ability: Decodable, Hashable{
     let ability: Result
     let isHidden: Bool
     
@@ -34,13 +38,13 @@ struct Ability: Decodable{
     }
 }
 
-struct Result: Decodable{
+struct Result: Decodable, Hashable{
     let name: String
 }
 
 //Pokemon Images
 // MARK: - Sprites
-struct Sprites: Decodable {
+struct Sprites: Decodable, Hashable {
     let backDefault: URL?
     let backFemale: URL?
     let backShiny: URL?
@@ -50,10 +54,22 @@ struct Sprites: Decodable {
     let frontShiny: URL?
     let frontShinyFemale: URL?
     let other: Other?
+    
+    enum CodingKeys: String, CodingKey {
+        case frontDefault = "front_default"
+        case backDefault
+        case backFemale
+        case backShiny
+        case backShinyFemale
+        case frontFemale
+        case frontShiny
+        case frontShinyFemale
+        case other
+    }
 }
 
 // MARK: - Other
-struct Other: Decodable {
+struct Other: Decodable, Hashable {
     let officialArtwork: OfficialArtwork?
 
     enum CodingKeys: String, CodingKey {
@@ -62,20 +78,24 @@ struct Other: Decodable {
 }
 
 // MARK: - OfficialArtwork
-struct OfficialArtwork: Decodable {
+struct OfficialArtwork: Decodable, Hashable {
     let frontDefault: URL?
+    
+    enum CodingKeys: String, CodingKey {
+        case frontDefault = "front_default"
+    }
 }
 
 //Pokemon Stats
 // MARK: - Stats
-struct Stats: Decodable {
+struct Stats: Decodable, Hashable {
     let baseStat: Int?
     let effort: Int?
     let stat: Stat
 }
 
 // MARK: - Stat
-struct Stat: Decodable {
+struct Stat: Decodable, Hashable {
     let name: StatName
 }
 
@@ -125,12 +145,12 @@ enum StatName: String, Decodable{
 }
 
 // MARK: - TypeElement
-struct TypeElement: Decodable {
+struct TypeElement: Decodable, Hashable {
     let type: Type
 }
 
 // MARK: - Type
-struct Type: Decodable {
+struct Type: Decodable, Hashable {
     let name: PokemonType
 }
 
