@@ -9,14 +9,26 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @StateObject private var viewModel = MainViewModel()
+    @ObservedObject private var viewModel = MainViewModel()
+    
+    var items: [GridItem] {
+        Array(repeating: .init(.adaptive(minimum: 120)), count: 2)
+    }
     
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text(($viewModel.pokemons.count).description)
+        NavigationView{
+            ZStack{
+                ScrollView{
+                    LazyVGrid(columns: items, spacing: 20){
+                        ForEach(viewModel.pokemons, id: \.self){ value in
+                            NavigationLink(destination: PokemonDetailView()){
+                                PokemonCell(pokemon: value)
+                            }
+                        }
+                    }
+                    .padding(EdgeInsets(top: 10, leading: 30, bottom: 10, trailing: 30))
+                }
+            }
         }
         .padding()
         .onAppear(perform: viewModel.fetchPokemons)
