@@ -23,6 +23,12 @@ struct ContentView: View {
                         ForEach(viewModel.pokemons, id: \.self){ value in
                             NavigationLink(destination: PokemonDetailView()){
                                 PokemonCell(pokemon: value)
+                                    .task {
+                                        if value == viewModel.pokemons.last{
+                                            let _ = viewModel.fetchPokemons()
+                                        }
+                                    }
+                                
                             }
                         }
                     }
