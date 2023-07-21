@@ -47,6 +47,6 @@ playground.xcworkspace
 # .swiftpm
 
 .build/
-ConsutivaiOS.xcodeproj/project.pbxproj
-ConsutivaiOS.xcworkspace/xcshareddata/swiftpm/Package.resolved
-ConsutivaiOS.xcworkspace/xcshareddata/swiftpm/Package.resolved
+PokedexApp_Combine-SwiftUI.xcodeproj/project.pbxproj
+PokedexApp_Combine-SwiftUI.xcworkspace/xcshareddata/swiftpm/Package.resolved
+PokedexApp_Combine-SwiftUI.xcworkspace/xcshareddata/swiftpm/Package.resolved
