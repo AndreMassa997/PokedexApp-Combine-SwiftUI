@@ -25,6 +25,8 @@ struct PokemonCell: View {
                                 .frame(height: 100)
                         case .empty:
                         ProgressView()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(height: 100)
                     case .failure(_):
                         EmptyView()
                             .frame(height: 100)
