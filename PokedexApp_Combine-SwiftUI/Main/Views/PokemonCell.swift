@@ -16,6 +16,7 @@ struct PokemonCell: View {
             RoundedRectangle(cornerRadius: 20)
                 .padding(EdgeInsets(top: 50, leading: 0, bottom: 0, trailing: 0))
                 .foregroundColor(Color(uiColor: pokemon.types?.first?.type.name.mainColor ?? .black))
+                .shadow(color: .black.opacity(0.5), radius: 2)
             VStack{
                 CachedAsyncImage(url: (pokemon.sprites?.other?.officialArtwork?.frontDefault ?? pokemon.sprites?.frontDefault) ?? URL(fileURLWithPath: "")){ phase in
                     switch phase{
