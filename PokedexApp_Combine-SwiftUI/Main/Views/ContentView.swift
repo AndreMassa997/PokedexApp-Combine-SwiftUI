@@ -28,11 +28,11 @@ struct ContentView: View {
                                             let _ = viewModel.fetchPokemons()
                                         }
                                     }
-                                
                             }
                         }
                     }
-                    .padding(EdgeInsets(top: 10, leading: 30, bottom: 10, trailing: 30))
+                    .padding(EdgeInsets(top: 10, leading: 20, bottom: 20, trailing: 20))
+                    LoaderView()
                 }
             }
         }
