@@ -10,7 +10,7 @@ import Foundation
 
 class MainViewModel: ObservableObject {
     
-    @Published var offsetToRequest: Int = 0
+    private var offsetToRequest: Int = 0
     @Published var pokemons = [PokemonModel]()
     private var cancellables = [AnyCancellable]()
         
@@ -41,7 +41,10 @@ class MainViewModel: ObservableObject {
                                 .sink(receiveCompletion: { _ in
                                     
                                 }, receiveValue: { pokemon in
-                                    self.pokemons.append(pokemon)
+                                    var tmpPokemons = self.pokemons
+                                    tmpPokemons.append(pokemon)
+                                    tmpPokemons.sort(by: { $0.id < $1.id })
+                                    self.pokemons = tmpPokemons
                                 })
                                 .store(in: &self.cancellables)
                         }
