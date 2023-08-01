@@ -39,7 +39,9 @@ struct MainView: View {
                                        )
                     LazyVGrid(columns: items, spacing: 20){
                         ForEach(viewModel.pokemons, id: \.self){ value in
-                            NavigationLink(destination: PokemonDetailView()){
+                            NavigationLink{
+                                PokemonDetailView(pokemonModel: value)
+                            } label: {
                                 PokemonCell(pokemon: value)
                                     .task {
                                         if value == viewModel.pokemons.last{
@@ -56,7 +58,6 @@ struct MainView: View {
                 }
             }
         }
-        .padding()
         .onAppear(perform: viewModel.getPokemons)
     }
 }

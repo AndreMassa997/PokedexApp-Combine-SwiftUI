@@ -6,3 +6,13 @@
 //
 
 import Foundation
+
+class DetailViewModel: ObservableObject{
+    
+    let pokemon: PokemonModel
+    
+    init(pokemonModel: PokemonModel) {
+        self.pokemon = pokemonModel
+    }
+    
+}

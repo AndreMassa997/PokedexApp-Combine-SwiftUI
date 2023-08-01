@@ -8,13 +8,26 @@
 import SwiftUI
 
 struct PokemonDetailView: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+    
+    @ObservedObject var viewModel: DetailViewModel
+    
+    init(pokemonModel: PokemonModel){
+        viewModel = DetailViewModel(pokemonModel: pokemonModel)
     }
-}
-
-struct PokemonDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        PokemonDetailView()
+    
+    var body: some View {
+        ZStack{
+            LinearGradient(gradient: Gradient(colors: [
+                Color(viewModel.pokemon.types?.first?.type.name.mainColor ?? .clear),
+                Color(viewModel.pokemon.types?.first?.type.name.endColor ?? .clear)]),
+                           startPoint: .leading,
+                           endPoint: .trailing)
+            .scaledToFill()
+            ScrollView{
+                
+            }
+        }
+        .navigationBarBackButtonHidden(true)
+        .edgesIgnoringSafeArea(.all)
     }
 }
