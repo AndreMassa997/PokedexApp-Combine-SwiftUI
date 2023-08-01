@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MainView: View {
     
-    @ObservedObject private var viewModel = MainViewModel()
+    @StateObject private var viewModel = MainViewModel()
     
     var items: [GridItem] {
         Array(repeating: .init(.adaptive(minimum: 120)), count: 2)
