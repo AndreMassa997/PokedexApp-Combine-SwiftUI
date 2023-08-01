@@ -57,13 +57,13 @@ struct Sprites: Decodable, Hashable {
     
     enum CodingKeys: String, CodingKey {
         case frontDefault = "front_default"
-        case backDefault
-        case backFemale
-        case backShiny
-        case backShinyFemale
-        case frontFemale
-        case frontShiny
-        case frontShinyFemale
+        case backDefault = "back_default"
+        case backFemale = "back_female"
+        case backShiny = "back_shiny"
+        case backShinyFemale = "back_shiny_female"
+        case frontFemale = "front_female"
+        case frontShiny = "front_shiny"
+        case frontShinyFemale = "front_shiny_female"
         case other
     }
 }
