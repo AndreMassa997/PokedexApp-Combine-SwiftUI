@@ -50,7 +50,9 @@ struct MainView: View {
                         }
                     }
                     .padding(EdgeInsets(top: 10, leading: 20, bottom: 20, trailing: 20))
-                    LoaderView()
+                    if viewModel.isLoading{
+                        LoaderView()
+                    }
                 }
             }
         }

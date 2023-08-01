@@ -13,6 +13,8 @@ class MainViewModel: ObservableObject {
     @Published var allPokemons = [PokemonModel]()
     @Published var searchedPokemons = [PokemonModel]()
     
+    @Published var isLoading: Bool = false
+    
     @Published var searchText = ""
     
     var pokemons: [PokemonModel]{
@@ -38,6 +40,7 @@ class MainViewModel: ObservableObject {
     }
         
     func getPokemons(){
+        self.isLoading = true
         fetchPokemons(offsetToRequest)
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { _ in }, receiveValue: { [weak self] mainModel in
@@ -53,6 +56,7 @@ class MainViewModel: ObservableObject {
                                 tmpPokemons.append(pokemon)
                                 tmpPokemons.sort(by: { $0.id < $1.id })
                                 self.allPokemons = tmpPokemons
+                                self.isLoading = false
                             })
                             .store(in: &self.cancellables)
                     }
