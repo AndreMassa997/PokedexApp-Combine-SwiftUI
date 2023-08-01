@@ -13,6 +13,28 @@ class MainViewModel: ObservableObject {
     private var offsetToRequest: Int = 0
     @Published var pokemons = [PokemonModel]()
     private var cancellables = [AnyCancellable]()
+    
+    @Published var searchText = ""
+    
+    init(){
+        $searchText
+            .debounce(for: 0.3, scheduler: RunLoop.main)
+            .removeDuplicates()
+            .compactMap({ $0 })
+            .sink(receiveValue: { [weak self] searchField in
+                guard let self = self else { return }
+                if searchField.isEmpty{
+                    self.fetchPokemons()
+                }else{
+                    self.searchPokemon(nameOrId: searchField)
+                        .sink(receiveCompletion: { _ in }, receiveValue: { foundedPokemons in
+                            self.pokemons = foundedPokemons
+                        })
+                        .store(in: &self.cancellables)
+                }
+            })
+            .store(in: &cancellables)
+    }
         
     func fetchPokemons(){
         var components = URLComponents()
@@ -70,7 +92,57 @@ class MainViewModel: ObservableObject {
                 })
                 .store(in: &self.cancellables)
         }
-       
+    }
+    
+    private func fetchPokemonByNameOrId(_ nameOrId: String) -> Future<PokemonModel, Error>{
+        return Future<PokemonModel, Error>{ [weak self] promise in
+            guard let self = self else { return }
+            var components = URLComponents()
+            components.scheme = "https"
+            components.path = "pokeapi.co/api/v2/pokemon/"
+            components.path.append(nameOrId)
+            
+            guard let url = components.url else {
+                print("Unable to compose URL")
+                return
+            }
+            
+            URLSession.shared.dataTaskPublisher(for: url)
+                .receive(on: DispatchQueue.main)
+                .map(\.data)
+                .decode(type: PokemonModel.self, decoder: JSONDecoder())
+                .sink(receiveCompletion: { res in
+                    if case let .failure(error) = res{
+                        promise(.failure(error))
+                    }
+                }, receiveValue: { pokemonModel in
+                    promise(.success(pokemonModel))
+                })
+                .store(in: &self.cancellables)
+        }
+    }
+    
+    private func searchPokemon(nameOrId: String) -> Future<[PokemonModel], Error>{
+        return Future<[PokemonModel], Error>{ [weak self] promise in
+            guard let self = self else { return }
+            let filteredPokemons = self.pokemons.filter { pokemon in
+                if let id = Int(nameOrId){
+                    return pokemon.id == id
+                }
+                //otherwise search by name
+                return pokemon.name.lowercased().contains(nameOrId.lowercased())
+            }
+            if !filteredPokemons.isEmpty{
+                promise(.success(filteredPokemons))
+            }else{
+                self.fetchPokemonByNameOrId(nameOrId)
+                    .sink(receiveCompletion: { _ in }, receiveValue: { foundedPokemon in
+                        promise(.success([foundedPokemon]))
+                    })
+                    .store(in: &self.cancellables)
+                
+            }
+        }
     }
     
 }

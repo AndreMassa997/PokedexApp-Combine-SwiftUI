@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  MainView.swift
 //  PokedexApp_Combine-SwiftUI
 //
 //  Created by Andrea Massari on 21/07/23.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct MainView: View {
     
     @ObservedObject private var viewModel = MainViewModel()
     
@@ -19,6 +19,24 @@ struct ContentView: View {
         NavigationView{
             ZStack{
                 ScrollView{
+                    Image("logo")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(height: 100)
+                    TextField("Search name or id", text: $viewModel.searchText)
+                                       .padding(.horizontal, 40)
+                                       .frame(width: UIScreen.main.bounds.width - 50, height: 45, alignment: .leading)
+                                       .background(Color(#colorLiteral(red: 0.9294475317, green: 0.9239223003, blue: 0.9336946607, alpha: 1)))
+                                       .clipped()
+                                       .cornerRadius(10)
+                                       .overlay(
+                                           HStack {
+                                               Image(systemName: "magnifyingglass")
+                                                   .foregroundColor(.gray)
+                                                   .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+                                                   .padding(.leading, 16)
+                                           }
+                                       )
                     LazyVGrid(columns: items, spacing: 20){
                         ForEach(viewModel.pokemons, id: \.self){ value in
                             NavigationLink(destination: PokemonDetailView()){
@@ -43,6 +61,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        MainView()
     }
 }
