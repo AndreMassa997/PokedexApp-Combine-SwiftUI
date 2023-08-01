@@ -43,7 +43,7 @@ struct MainView: View {
                                 PokemonCell(pokemon: value)
                                     .task {
                                         if value == viewModel.pokemons.last{
-                                            let _ = viewModel.fetchPokemons()
+                                            let _ = viewModel.getPokemons()
                                         }
                                     }
                             }
@@ -55,7 +55,7 @@ struct MainView: View {
             }
         }
         .padding()
-        .onAppear(perform: viewModel.fetchPokemons)
+        .onAppear(perform: viewModel.getPokemons)
     }
 }
 
