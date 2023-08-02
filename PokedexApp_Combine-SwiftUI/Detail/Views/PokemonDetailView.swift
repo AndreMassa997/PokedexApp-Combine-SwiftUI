@@ -35,7 +35,6 @@ struct PokemonDetailView: View {
                     .frame(maxWidth: .infinity, maxHeight: 30, alignment: .leading)
                     .padding(.leading, 20)
                     ImageCarouselView(imagesUrl: viewModel.urls, color: viewModel.pokemon.types?.first?.type.name.mainColor ?? .clear, name: viewModel.pokemon.name, id: String.init(format: "#%03d", viewModel.pokemon.id))
-                        .frame(minHeight: 250, alignment: .center)
                     ChipsView(types: viewModel.types)
                     DimensionsView(weight: Float(viewModel.pokemon.weight ?? 0)/10, height: Float(viewModel.pokemon.height ?? 0)/10, color: viewModel.pokemon.types?.first?.type.name.mainColor ?? .clear)
                     StatsView(stats: viewModel.pokemon.stats ?? [], color: Color(viewModel.pokemon.types?.first?.type.name.mainColor ?? .clear))

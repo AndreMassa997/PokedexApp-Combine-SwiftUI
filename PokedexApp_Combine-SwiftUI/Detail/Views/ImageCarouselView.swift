@@ -38,7 +38,9 @@ struct ImageCarouselView: View {
                             }
                             .frame(width: 200, height: 200)
                     }
-                }.tabViewStyle(PageTabViewStyle())
+                }
+                .frame(height: 250)
+                .tabViewStyle(PageTabViewStyle())
                 
                 Text(name.capitalized)
                     .font(
