@@ -73,9 +73,8 @@ struct DimensionView: View{
                     .weight(.heavy))
                 .foregroundColor(color)
             Spacer()
-            ProgressView(value: progress)
-                .progressViewStyle(.linear)
-                .tint(color)
+            ProgressBar(value: progress, color: color)
+                .frame(height: 3)
         }
     }
 }

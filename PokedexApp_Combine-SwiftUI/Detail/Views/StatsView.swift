@@ -61,10 +61,8 @@ struct StatView: View{
                     .weight(.thin))
                 .frame(width: 30)
             Spacer()
-            ProgressView(value: progressValue)
-                .progressViewStyle(.linear)
-                .tint(color)
-            
+            ProgressBar(value: progressValue, color: color)
+                .frame(height: 3)
         }
     }
 }
