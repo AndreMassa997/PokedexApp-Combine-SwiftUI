@@ -51,7 +51,6 @@ struct DimensionsView: View {
                 .frame(height: 100)
             }
             .padding(.vertical, 10)
-            .padding(.horizontal, 15)
         }
     }
 }

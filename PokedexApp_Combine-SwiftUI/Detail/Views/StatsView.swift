@@ -23,7 +23,7 @@ struct StatsView: View {
                 ForEach(stats, id: \.self) { stat in
                     StatView(stat: stat, color: color)
                 }.padding(.vertical, 5)
-                .padding(.horizontal, 10)
+                .padding(.horizontal, 30)
             }
         }
     }
@@ -54,7 +54,7 @@ struct StatView: View{
                 .font(.system(size: 12)
                     .weight(.heavy))
                 .foregroundColor(color)
-                .frame(width: 40)
+                .frame(width: 40, alignment: .leading)
             Spacer()
             Text(statValue)
                 .font(.system(size: 14)
@@ -62,7 +62,6 @@ struct StatView: View{
                 .frame(width: 30)
             Spacer()
             ProgressBar(value: progressValue, color: color)
-                .frame(height: 3)
         }
     }
 }
