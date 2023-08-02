@@ -21,6 +21,7 @@
 		3E993E3F2A7A593C006F518A /* ChipsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E993E3E2A7A593C006F518A /* ChipsView.swift */; };
 		3E993E412A7A895D006F518A /* DimensionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E993E402A7A895D006F518A /* DimensionsView.swift */; };
 		3E993E432A7A97B2006F518A /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E993E422A7A97B2006F518A /* StatsView.swift */; };
+		3E993E452A7A9DE4006F518A /* AbilitiesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E993E442A7A9DE4006F518A /* AbilitiesView.swift */; };
 		3EBE36482A78FB1700596659 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBE36472A78FB1700596659 /* Network.swift */; };
 		3EBE364C2A7937C100596659 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBE364B2A7937C100596659 /* DetailViewModel.swift */; };
 		3EBE364E2A79563A00596659 /* UINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBE364D2A79563A00596659 /* UINavigationController.swift */; };
@@ -44,6 +45,7 @@
 		3E993E3E2A7A593C006F518A /* ChipsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChipsView.swift; sourceTree = "<group>"; };
 		3E993E402A7A895D006F518A /* DimensionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DimensionsView.swift; sourceTree = "<group>"; };
 		3E993E422A7A97B2006F518A /* StatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsView.swift; sourceTree = "<group>"; };
+		3E993E442A7A9DE4006F518A /* AbilitiesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbilitiesView.swift; sourceTree = "<group>"; };
 		3EBE36472A78FB1700596659 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		3EBE364B2A7937C100596659 /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 		3EBE364D2A79563A00596659 /* UINavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationController.swift; sourceTree = "<group>"; };
@@ -164,6 +166,7 @@
 				3E993E3E2A7A593C006F518A /* ChipsView.swift */,
 				3E993E402A7A895D006F518A /* DimensionsView.swift */,
 				3E993E422A7A97B2006F518A /* StatsView.swift */,
+				3E993E442A7A9DE4006F518A /* AbilitiesView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -246,6 +249,7 @@
 				3E51894C2A6A79EC00F4F818 /* MainView.swift in Sources */,
 				3EBE36482A78FB1700596659 /* Network.swift in Sources */,
 				3EBE364E2A79563A00596659 /* UINavigationController.swift in Sources */,
+				3E993E452A7A9DE4006F518A /* AbilitiesView.swift in Sources */,
 				3E51894A2A6A79EC00F4F818 /* PokedexApp_Combine_SwiftUIApp.swift in Sources */,
 				3EBE36502A79577200596659 /* ImageCarouselView.swift in Sources */,
 				3E993E3F2A7A593C006F518A /* ChipsView.swift in Sources */,
