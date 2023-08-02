@@ -38,6 +38,10 @@ class MainViewModel: ObservableObject {
             .receive(on: DispatchQueue.main)
             .assign(to: &$searchedPokemons)
     }
+    
+    func resetReasearch(){
+        self.searchText = ""
+    }
         
     func getPokemons(){
         self.isLoading = true

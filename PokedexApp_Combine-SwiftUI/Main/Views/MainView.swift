@@ -35,6 +35,17 @@ struct MainView: View {
                                                    .foregroundColor(.gray)
                                                    .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
                                                    .padding(.leading, 16)
+                                               if !viewModel.searchText.isEmpty{
+                                                   Button {
+                                                       viewModel.resetReasearch()
+                                                   } label: {
+                                                       Image(systemName: "xmark.circle.fill")
+                                                           .foregroundColor(.gray)
+                                                           .frame(width: 30,
+                                                                  height: 30, alignment: .trailing)
+                                                           .padding(.trailing, 16)
+                                                   }
+                                               }
                                            }
                                        )
                     LazyVGrid(columns: items, spacing: 20){
