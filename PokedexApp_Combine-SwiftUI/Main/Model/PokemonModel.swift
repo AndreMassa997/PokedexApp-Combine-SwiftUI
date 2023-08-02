@@ -92,6 +92,12 @@ struct Stats: Decodable, Hashable {
     let baseStat: Int?
     let effort: Int?
     let stat: Stat
+    
+    enum CodingKeys: String, CodingKey {
+        case baseStat = "base_stat"
+        case effort
+        case stat
+    }
 }
 
 // MARK: - Stat
