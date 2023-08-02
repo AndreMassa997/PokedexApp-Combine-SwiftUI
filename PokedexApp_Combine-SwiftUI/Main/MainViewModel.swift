@@ -76,7 +76,7 @@ class MainViewModel: ObservableObject {
             return Just(filteredPokemons)
                 .eraseToAnyPublisher()
         }else{
-            return fetchPokemonByNameOrId(nameOrId)
+            return fetchPokemonByNameOrId(nameOrId.lowercased())
                 .map({ [$0] })
                 .replaceError(with: [])
                 .eraseToAnyPublisher()
