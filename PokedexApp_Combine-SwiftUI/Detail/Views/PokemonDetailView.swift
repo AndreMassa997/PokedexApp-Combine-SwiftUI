@@ -25,20 +25,19 @@ struct PokemonDetailView: View {
                            startPoint: .leading,
                            endPoint: .trailing)
             .edgesIgnoringSafeArea(.all)
-            .scaledToFill()
             ScrollView{
-                ImageCarouselView(imagesUrl: viewModel.getUrl(), color: viewModel.pokemon.types?.first?.type.name.mainColor ?? .clear)
-                    .frame(width: 200, height: 200)
-                
-            }
-        }
-        .toolbar{
-            ToolbarItem(placement: .navigationBarLeading){
-                Button{
-                    presentationMode.wrappedValue.dismiss()
-                } label: {
-                    Image("arrow_left")
-                        .frame(width: 30, height: 30)
+                VStack(spacing: 0){
+                    Button{
+                        presentationMode.wrappedValue.dismiss()
+                    } label: {
+                        Image("arrow_left")
+                    }
+                    .frame(maxWidth: .infinity, maxHeight: 30, alignment: .leading)
+                    .padding(.leading, 20)
+                    ImageCarouselView(imagesUrl: viewModel.urls, color: viewModel.pokemon.types?.first?.type.name.mainColor ?? .clear, name: viewModel.pokemon.name, id: String.init(format: "#%03d", viewModel.pokemon.id))
+                        .frame(minHeight: 250, alignment: .center)
+                    ChipsView(types: viewModel.types)
+                    DimensionsView(weight: Float(viewModel.pokemon.weight ?? 0)/10, height: Float(viewModel.pokemon.height ?? 0)/10, color: viewModel.pokemon.types?.first?.type.name.mainColor ?? .clear)
                 }
             }
         }

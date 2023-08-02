@@ -15,7 +15,7 @@ class DetailViewModel: ObservableObject{
         self.pokemon = pokemonModel
     }
     
-    func getUrl() -> [URL]{
+    var urls: [URL]{
         [pokemon.sprites?.other?.officialArtwork?.frontDefault,
             pokemon.sprites?.backDefault,
             pokemon.sprites?.backFemale,
@@ -26,6 +26,12 @@ class DetailViewModel: ObservableObject{
             pokemon.sprites?.frontShiny,
             pokemon.sprites?.frontShinyFemale,
         ].compactMap { $0 }
+    }
+    
+    var types: [PokemonType]{
+        pokemon.types?.compactMap({
+            $0.type.name
+        }) ?? []
     }
     
     deinit{
