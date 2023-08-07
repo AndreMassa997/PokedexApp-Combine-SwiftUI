@@ -56,7 +56,11 @@ struct MainView: View {
                                 PokemonCell(pokemon: value)
                                     .task {
                                         if value == viewModel.pokemons.last{
-                                            let _ = viewModel.getPokemons()
+                                            do{
+                                                try await viewModel.getPokemons()
+                                            }catch{
+                                                
+                                            }
                                         }
                                     }
                             }
@@ -69,7 +73,13 @@ struct MainView: View {
                 }
             }
         }
-        .onAppear(perform: viewModel.getPokemons)
+        .task{
+            do{
+                try await viewModel.getPokemons()
+            }catch{
+                
+            }
+        }
     }
 }
 

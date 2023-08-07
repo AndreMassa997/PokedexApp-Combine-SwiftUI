@@ -43,29 +43,28 @@ class MainViewModel: ObservableObject {
         self.searchText = ""
     }
         
-    func getPokemons(){
-        self.isLoading = true
-        fetchPokemons(offsetToRequest)
-            .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: { _ in }, receiveValue: { [weak self] mainModel in
-                guard let self = self else { return }
-                if let nextUrl = mainModel.next, let nextOffsetString = nextUrl.getQueryStringParameter(param: "offset"), let nextOffset = Int(nextOffsetString){
-                    self.offsetToRequest = nextOffset
-                    mainModel.results?.forEach{ result in
-                        guard let url = result.url else { return }
-                        fetchPokemon(url: url)
-                            .receive(on: DispatchQueue.main)
-                            .sink(receiveCompletion: { _ in }, receiveValue: { pokemon in
-                                var tmpPokemons = self.allPokemons
-                                tmpPokemons.append(pokemon)
-                                tmpPokemons.sort(by: { $0.id < $1.id })
-                                self.allPokemons = tmpPokemons
-                                self.isLoading = false
-                            })
-                            .store(in: &self.cancellables)
-                    }
-                }
-            }).store(in: &cancellables)
+    func getPokemons() async throws{
+        DispatchQueue.main.async {
+            self.isLoading = true
+        }
+        let mainModel = try await fetchPokemons(offsetToRequest)
+        if let nextUrl = mainModel.next, let nextOffsetString = nextUrl.getQueryStringParameter(param: "offset"), let nextOffset = Int(nextOffsetString){
+            DispatchQueue.main.async {
+                self.offsetToRequest = nextOffset
+            }
+        }
+        guard let results = mainModel.results else { throw NetworkError.invalidData }
+        for result in results{
+            guard let url = result.url else { throw NetworkError.invalidURL }
+            let pokemon = try await fetchPokemon(url: url)
+            DispatchQueue.main.async {
+                var tmpPokemons = self.allPokemons
+                tmpPokemons.append(pokemon)
+                tmpPokemons.sort(by: { $0.id < $1.id })
+                self.allPokemons = tmpPokemons
+                self.isLoading = false
+            }
+        }
     }
     
     private func searchPokemon(nameOrId: String) -> some Publisher<[PokemonModel], Never>{
